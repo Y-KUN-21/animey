@@ -1,24 +1,21 @@
 class PopularAnimeModel {
-  String cover;
   String name;
-  String categories;
   String url;
+  String imageUrl;
 
-  PopularAnimeModel({this.cover, this.name, this.categories, this.url});
+  PopularAnimeModel({this.name, this.url, this.imageUrl});
 
   PopularAnimeModel.fromJson(Map<String, dynamic> json) {
-    cover = json['cover'];
     name = json['name'];
-    categories = json['categories'];
     url = json['url'];
+    imageUrl = json['imageUrl'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['cover'] = this.cover;
     data['name'] = this.name;
-    data['categories'] = this.categories;
     data['url'] = this.url;
+    data['imageUrl'] = this.imageUrl;
     return data;
   }
 }

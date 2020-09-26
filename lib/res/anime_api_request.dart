@@ -1,6 +1,5 @@
 import 'package:anime/model/anime_detail_model.dart';
 import 'package:anime/model/popular.dart';
-import 'package:anime/model/recent_dub.dart';
 import 'package:anime/model/recent_sub.dart';
 import 'package:anime/model/searched_anime_model.dart';
 import 'package:http/http.dart' as http;
@@ -16,12 +15,11 @@ class AnimeApiRequest {
     maxStale: Duration(days: 1),
   );
   Dio dio = Dio();
-  static String mainurl = "https://animeyapi.herokuapp.com";
+  static String mainurl = "https://goanimey.herokuapp.com/api";
   var getPopular = "$mainurl/popular";
-  var getSubbed = "$mainurl/subbed";
-  var getDubbed = "$mainurl/dubbed";
+  var getSubbed = "$mainurl/recent";
   var getDetail = "$mainurl/detail?anime=";
-  var getSearched = "$mainurl/search/";
+  var getSearched = "$mainurl/search?anime=";
   var client = http.Client();
   Future<List<PopularAnimeModel>> getPopularAnime() async {
     dio.interceptors.add(_dioCacheManager.interceptor);
@@ -35,29 +33,16 @@ class AnimeApiRequest {
     return popularAnimeModel;
   }
 
-  Future<List<RecentSubbedModel>> getRecentSubbed() async {
+  Future<List<RecentAnimeModel>> getRecentSubbed() async {
     dio.interceptors.add(_dioCacheManager.interceptor);
     Response response = await dio.get(getSubbed, options: _cacheOptions);
-    final List rawData = jsonDecode(jsonEncode(response.data));
+    final List rawData = jsonDecode(jsonEncode(response.data).toString());
     if (response.statusCode != 200) {
       print("error");
     }
-    List<RecentSubbedModel> recentSubbedModel =
-        rawData.map((f) => RecentSubbedModel.fromJson(f)).toList();
-    return recentSubbedModel;
-  }
-
-  Future<List<RecentDubbedModel>> getRecentDubbed() async {
-    dio.interceptors.add(_dioCacheManager.interceptor);
-    print(getDubbed);
-    Response response = await dio.get(getDubbed, options: _cacheOptions);
-    final List rawData = jsonDecode(jsonEncode(response.data));
-    if (response.statusCode != 200) {
-      print("error");
-    }
-    List<RecentDubbedModel> recentDubbedModel =
-        rawData.map((f) => RecentDubbedModel.fromJson(f)).toList();
-    return recentDubbedModel;
+    List<RecentAnimeModel> recentAnimeModel =
+        rawData.map((f) => RecentAnimeModel.fromJson(f)).toList();
+    return recentAnimeModel;
   }
 
   Future<List<AnimeDetailModel>> getAnimeDetail(String anime) async {

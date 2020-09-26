@@ -2,13 +2,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class KlistViewVertical extends StatelessWidget {
+class KlistViewDb extends StatelessWidget {
   final int tag;
   final String category;
   final String name;
   final String imageUrl;
   final Function onTap;
-  KlistViewVertical(
+  KlistViewDb(
       {Key key, this.category, this.name, this.tag, this.imageUrl, this.onTap})
       : super(key: key);
   @override

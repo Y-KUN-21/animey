@@ -1,21 +1,21 @@
-class RecentSubbedModel {
-  String url;
-  String cover;
+class RecentAnimeModel {
   String name;
+  String url;
+  String imageUrl;
 
-  RecentSubbedModel({this.url, this.cover, this.name});
+  RecentAnimeModel({this.name, this.url, this.imageUrl});
 
-  RecentSubbedModel.fromJson(Map<String, dynamic> json) {
-    url = json['url'];
-    cover = json['cover'];
+  RecentAnimeModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
+    url = json['url'];
+    imageUrl = json['imageUrl'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['url'] = this.url;
-    data['cover'] = this.cover;
     data['name'] = this.name;
+    data['url'] = this.url;
+    data['imageUrl'] = this.imageUrl;
     return data;
   }
 }
