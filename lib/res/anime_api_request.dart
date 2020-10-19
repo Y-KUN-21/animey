@@ -15,7 +15,7 @@ class AnimeApiRequest {
     maxStale: Duration(days: 1),
   );
   Dio dio = Dio();
-  static String mainurl = "https://animey.herokuapp.com/api";
+  static String mainurl = "link-to-api -_-";
   var getPopular = "$mainurl/popular";
   var getSubbed = "$mainurl/recent";
   var getDetail = "$mainurl/detail?anime=";

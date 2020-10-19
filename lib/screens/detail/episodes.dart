@@ -108,7 +108,7 @@ class _EpisodesState extends State<Episodes> {
   }
 
   Future<String> getVideo(String episodePage) async {
-    String url = "https://animey.herokuapp.com/api/video?episode=$episodePage";
+    String url = "link-to-api -_-/parameter=$episodePage";
     Response response = await Dio().get(url);
     if (response.statusCode != 200) {
       setState(() {
