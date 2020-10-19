@@ -3,23 +3,18 @@ class SearchedAnimeModel {
   String year;
   String season;
   String status;
-  String imageurl;
+  String cover;
   String url;
 
   SearchedAnimeModel(
-      {this.name,
-      this.year,
-      this.season,
-      this.status,
-      this.imageurl,
-      this.url});
+      {this.name, this.year, this.season, this.status, this.cover, this.url});
 
   SearchedAnimeModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     year = json['year'];
     season = json['season'];
     status = json['status'];
-    imageurl = json['imageurl'];
+    cover = json['cover'];
     url = json['url'];
   }
 
@@ -29,7 +24,7 @@ class SearchedAnimeModel {
     data['year'] = this.year;
     data['season'] = this.season;
     data['status'] = this.status;
-    data['imageurl'] = this.imageurl;
+    data['cover'] = this.cover;
     data['url'] = this.url;
     return data;
   }

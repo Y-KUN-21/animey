@@ -108,8 +108,7 @@ class _EpisodesState extends State<Episodes> {
   }
 
   Future<String> getVideo(String episodePage) async {
-    String url = "https://animeyapi.herokuapp.com/video?episode=$episodePage";
-    print(url);
+    String url = "https://animey.herokuapp.com/api/video?episode=$episodePage";
     Response response = await Dio().get(url);
     if (response.statusCode != 200) {
       setState(() {
@@ -118,31 +117,28 @@ class _EpisodesState extends State<Episodes> {
     }
     final List rawData = await jsonDecode(jsonEncode(response.data).toString());
     var urls = await rawData[0];
+    print(urls);
+    print(urls['url0']);
     var result;
-    if (urls['url'][0] != null) {
+    if (urls['url0'] != null) {
       setState(() {
         isLoading = false;
-        result = urls["url"][0];
+        result = urls["url0"];
       });
+
       return result;
-    } else if (urls["url"][1] != null) {
+    } else if (urls["url1"] != null) {
       setState(() {
         isLoading = false;
         result = urls["url"][1];
       });
       return result;
-    }
-    if (urls['url'][2] != null) {
+    } else {
       setState(() {
         isLoading = false;
       });
-      result = urls["url"][2];
     }
-    setState(() {
-      isLoading = false;
-      result = urls["url"][0];
-    });
-    return result;
+    return null;
   }
 
   @override

@@ -7,12 +7,12 @@ import 'package:anime/res/anime_api_request.dart';
 class ApiRepository {
   final String anime;
   final String search;
-  final String episodeLink;
-  ApiRepository({this.anime, this.episodeLink, this.search});
+
+  ApiRepository({this.anime, this.search});
   AnimeApiRequest _provider = AnimeApiRequest();
   Future<List<PopularAnimeModel>> get getPopularAnime =>
       _provider.getPopularAnime();
-  Future<List<RecentAnimeModel>> get getRecentSubbed =>
+  Future<List<RecentSubbedModel>> get getRecentSubbed =>
       _provider.getRecentSubbed();
   Future<List<AnimeDetailModel>> get getAnimeDetail =>
       _provider.getAnimeDetail(anime);

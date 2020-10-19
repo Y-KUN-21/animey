@@ -15,7 +15,7 @@ class AnimeApiRequest {
     maxStale: Duration(days: 1),
   );
   Dio dio = Dio();
-  static String mainurl = "https://goanimey.herokuapp.com/api";
+  static String mainurl = "https://animey.herokuapp.com/api";
   var getPopular = "$mainurl/popular";
   var getSubbed = "$mainurl/recent";
   var getDetail = "$mainurl/detail?anime=";
@@ -33,21 +33,21 @@ class AnimeApiRequest {
     return popularAnimeModel;
   }
 
-  Future<List<RecentAnimeModel>> getRecentSubbed() async {
+  Future<List<RecentSubbedModel>> getRecentSubbed() async {
     dio.interceptors.add(_dioCacheManager.interceptor);
     Response response = await dio.get(getSubbed, options: _cacheOptions);
-    final List rawData = jsonDecode(jsonEncode(response.data).toString());
+    final List rawData = jsonDecode(jsonEncode(response.data));
     if (response.statusCode != 200) {
       print("error");
     }
-    List<RecentAnimeModel> recentAnimeModel =
-        rawData.map((f) => RecentAnimeModel.fromJson(f)).toList();
-    return recentAnimeModel;
+    List<RecentSubbedModel> recentSubbedModel =
+        rawData.map((f) => RecentSubbedModel.fromJson(f)).toList();
+    return recentSubbedModel;
   }
 
   Future<List<AnimeDetailModel>> getAnimeDetail(String anime) async {
     dio.interceptors.add(_dioCacheManager.interceptor);
-    print(getDetail + anime);
+
     Response response =
         await dio.get(getDetail + "$anime", options: _cacheOptions);
     final List rawData = jsonDecode(jsonEncode(response.data).toString());

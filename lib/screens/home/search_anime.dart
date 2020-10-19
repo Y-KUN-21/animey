@@ -92,8 +92,10 @@ class _SearchAnimeState extends State<SearchAnime> {
                         itemBuilder: (ctx, int index) {
                           var listdata = snapshot.data[index];
                           return KlistViewVertical(
-                            category: listdata.categories,
                             name: listdata.name,
+                            year: listdata.year,
+                            season: listdata.season,
+                            status: listdata.status,
                             imageUrl: listdata.cover,
                             tag: listdata.name.hashCode,
                             onTap: () {

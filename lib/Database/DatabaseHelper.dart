@@ -8,6 +8,8 @@ class DatabaseHelper {
   String pkey = "pkey";
   String imageUrl = "imageUrl";
   String category = "categories";
+  String status = "categories";
+  String season = "categories";
   static final id = 'id';
   String _tablePlanning = "planning";
 
@@ -38,7 +40,8 @@ class DatabaseHelper {
       $name TEXT,
       $url TEXT UNIQUE,
       $imageUrl TEXT,
-      $category TEXT)
+      $season TEXT,
+      $status TEXT)
     ''');
   }
 

@@ -34,8 +34,6 @@ class ShowImage extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: CachedNetworkImage(
-                      placeholder: (context, url) =>
-                          Center(child: CircularProgressIndicator()),
                       fit: BoxFit.fill,
                       imageUrl: imagePath,
                     ),

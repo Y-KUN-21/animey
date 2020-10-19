@@ -3,24 +3,33 @@ class AnimeDetailModel {
   String description;
   String studio;
   String tags;
-  List<String> episodesNo;
-  List<String> episodesLink;
+  String year;
+  String season;
+  String status;
+  List<String> episodeNumber;
+  List<String> episodes;
 
   AnimeDetailModel(
       {this.name,
       this.description,
       this.studio,
       this.tags,
-      this.episodesNo,
-      this.episodesLink});
+      this.year,
+      this.season,
+      this.status,
+      this.episodeNumber,
+      this.episodes});
 
   AnimeDetailModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     description = json['description'];
     studio = json['studio'];
     tags = json['tags'];
-    episodesNo = json['episodes_no'].cast<String>();
-    episodesLink = json['episodes_link'].cast<String>();
+    year = json['year'];
+    season = json['Season'];
+    status = json['Status'];
+    episodeNumber = json['episodeNumber'].cast<String>();
+    episodes = json['episodes'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -29,8 +38,11 @@ class AnimeDetailModel {
     data['description'] = this.description;
     data['studio'] = this.studio;
     data['tags'] = this.tags;
-    data['episodes_no'] = this.episodesNo;
-    data['episodes_link'] = this.episodesLink;
+    data['year'] = this.year;
+    data['Season'] = this.season;
+    data['Status'] = this.status;
+    data['episodeNumber'] = this.episodeNumber;
+    data['episodes'] = this.episodes;
     return data;
   }
 }

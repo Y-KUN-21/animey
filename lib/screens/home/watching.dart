@@ -59,12 +59,14 @@ class _WatchingState extends State<Watching> {
                   var listdata = snapshot.data[index];
                   var name = listdata["name"];
                   var imageUrl = listdata["imageUrl"];
-                  var category = listdata["categories"];
+                  var season = listdata["season"];
+                  var status = listdata["status"];
                   return KlistViewVertical(
-                    category: category,
+                    season: season,
                     name: name,
                     imageUrl: imageUrl,
                     tag: name.hashCode,
+                    status: status,
                     onTap: () {
                       Navigator.push(
                           context,

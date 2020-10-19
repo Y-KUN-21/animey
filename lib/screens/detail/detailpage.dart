@@ -129,20 +129,6 @@ class _DetailPageState extends State<DetailPage>
                                         minFontSize: 15,
                                         style: TextStyle(color: Colors.white),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 25),
-                                        child: AutoSizeText(
-                                          listdata.categories,
-                                          textAlign: TextAlign.center,
-                                          maxFontSize: 15,
-                                          minFontSize: 12,
-                                          maxLines: 2,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.grey),
-                                        ),
-                                      ),
                                       Align(
                                           alignment: Alignment.bottomCenter,
                                           child: Row(
@@ -194,7 +180,7 @@ class _DetailPageState extends State<DetailPage>
                 color: Colors.transparent,
                 child: Hero(
                   transitionOnUserGestures: true,
-                  tag: widget.tag,
+                  tag: widget.cover,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: CachedNetworkImage(
@@ -250,7 +236,8 @@ class _DetailPageState extends State<DetailPage>
       Map<String, dynamic> row = {
         _databaseHelper.pkey: url.hashCode,
         _databaseHelper.name: listdata.name,
-        _databaseHelper.category: listdata.categories,
+        _databaseHelper.status: listdata.status,
+        _databaseHelper.season: listdata.season,
         _databaseHelper.imageUrl: cover,
         _databaseHelper.url: url
       };

@@ -1,5 +1,4 @@
 import 'package:anime/screens/home/popular.dart';
-import 'package:anime/screens/home/recent_dub.dart';
 import 'package:anime/screens/home/recent_sub.dart';
 import 'package:anime/screens/home/search_anime.dart';
 import 'package:anime/screens/settings.dart';
@@ -81,10 +80,6 @@ class _HomepageState extends State<Homepage>
                 SizedBox(
                   height: 10,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                RecentDubAnimes(),
                 SizedBox(
                   height: 10,
                 ),

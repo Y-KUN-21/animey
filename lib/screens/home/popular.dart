@@ -103,7 +103,7 @@ class _PopularAnimesState extends State<PopularAnimes> {
                                       widget: DetailPage(
                                     title: listdata.name,
                                     cover: listdata.cover,
-                                    link: listdata.url,
+                                    link: listdata.url.toString(),
                                     tag: tag,
                                   )));
                             },
