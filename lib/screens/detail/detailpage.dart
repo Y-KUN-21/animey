@@ -2,6 +2,7 @@ import 'package:anime/Database/DatabaseHelper.dart';
 import 'package:anime/model/anime_detail_model.dart';
 import 'package:anime/res/api_respo.dart';
 import 'package:anime/screens/detail/episodes.dart';
+import 'package:anime/screens/home/watching.dart';
 import 'package:anime/utils/constant/circularbtn.dart';
 import 'package:anime/utils/constant/kSlidePageroute.dart';
 import 'package:auto_size_text/auto_size_text.dart';

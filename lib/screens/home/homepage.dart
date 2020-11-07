@@ -56,7 +56,8 @@ class _HomepageState extends State<Homepage>
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w900,
-            fontFamily: "OpenSans",
+            fontFamily: "BebasNeue",
+            letterSpacing: 4.0,
             color: Colors.red,
           ),
         ),

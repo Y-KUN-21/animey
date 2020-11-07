@@ -1,7 +1,7 @@
 import 'package:anime/Database/DatabaseHelper.dart';
 import 'package:anime/screens/detail/detailpage.dart';
 import 'package:anime/utils/constant/kSlidePageroute.dart';
-import 'package:anime/utils/constant/klistviewDb.dart';
+import 'package:anime/utils/constant/listViewhztl.dart';
 import 'package:flutter/material.dart';
 
 class Watching extends StatefulWidget {
@@ -53,20 +53,22 @@ class _WatchingState extends State<Watching> {
             var length = snapshot.data.length;
             return ListView.builder(
                 physics: ScrollPhysics(),
+                addRepaintBoundaries: true,
+                scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemCount: length,
                 itemBuilder: (ctx, int index) {
                   var listdata = snapshot.data[index];
                   var name = listdata["name"];
                   var imageUrl = listdata["imageUrl"];
-                  var season = listdata["season"];
-                  var status = listdata["status"];
-                  return KlistViewVertical(
-                    season: season,
-                    name: name,
-                    imageUrl: imageUrl,
-                    tag: name.hashCode,
-                    status: status,
+                  var url = listdata["url"];
+
+                  return KlistViewHorizontal(
+                    thumbnail: imageUrl == null
+                        ? CircularProgressIndicator()
+                        : imageUrl,
+                    tag: name.hashCode.toString(),
+                    title: name,
                     onTap: () {
                       Navigator.push(
                           context,
@@ -74,7 +76,7 @@ class _WatchingState extends State<Watching> {
                               widget: DetailPage(
                             title: name,
                             cover: imageUrl,
-                            link: listdata["url"],
+                            link: url,
                             tag: name.hashCode.toString(),
                           )));
                     },

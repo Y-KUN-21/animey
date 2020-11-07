@@ -86,6 +86,7 @@ class _PopularAnimesState extends State<PopularAnimes> {
                       height: 300,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
+                        addRepaintBoundaries: true,
                         itemCount: 10,
                         itemBuilder: (context, index) {
                           var listdata = snapshot.data[index];
