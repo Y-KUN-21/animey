@@ -5,6 +5,7 @@ import 'package:anime/views/recent_sub.dart';
 import 'package:anime/views/search_anime.dart';
 import 'package:anime/utils/constant/kSlidePageroute.dart';
 import 'package:anime/utils/constant/ktextStyle.dart';
+import 'package:anime/widgets/autosizetext.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,15 +17,12 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "animey",
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.w500,
-            fontFamily: "BebasNeue",
-            letterSpacing: 4.0,
-            color: Colors.red,
-          ),
+        title: CustomAutoSizeText(
+          text: "animey".toUpperCase(),
+          fontSize: 40,
+          fontWeight: FontWeight.w500,
+          fontfamily: "BebasNeue",
+          color: Colors.red,
         ),
         actions: [
           IconButton(
@@ -50,29 +48,35 @@ class Homepage extends StatelessWidget {
                   : Colors.grey[700],
             ),
             onPressed: () {
-              if (Get.isDarkMode) {
-                Get.changeTheme(ThemeData.light());
-              } else {
-                Get.changeTheme(ThemeData.dark());
-              }
+              changingTheme();
             }),
       ),
-      body: Column(children: [
-        KtextStyle(
-          text: " Popular",
-          icon: Icon(EvaIcons.arrowheadRightOutline),
-          onPressed: () {
-            Get.to(ViewAllPopular());
-          },
-        ),
-        PopularAnimes(),
-        KtextStyle(
-          text: " Recent Animes",
-          icon: Icon(EvaIcons.arrowheadRightOutline),
-          onPressed: () {},
-        ),
-        RecentAnimes(),
-      ]),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          KtextStyle(
+            text: " Popular",
+            icon: Icon(EvaIcons.arrowheadRightOutline),
+            onPressed: () {
+              Get.to(ViewAllPopular());
+            },
+          ),
+          PopularAnimes(),
+          KtextStyle(
+            text: " Recent Animes",
+            icon: Icon(EvaIcons.arrowheadRightOutline),
+            onPressed: () {},
+          ),
+          RecentAnimes(),
+        ]),
+      ),
     );
+  }
+}
+
+void changingTheme() {
+  if (Get.isDarkMode) {
+    Get.changeTheme(ThemeData.light());
+  } else {
+    Get.changeTheme(ThemeData.dark());
   }
 }

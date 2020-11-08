@@ -18,7 +18,7 @@ class RecentAnimes extends StatelessWidget {
           return ListView.builder(
             scrollDirection: Axis.horizontal,
             addRepaintBoundaries: true,
-            itemCount: 10,
+            itemCount: recentController.recentAnimeModel.length,
             itemBuilder: (context, index) {
               var listdata = recentController.recentAnimeModel[index];
               var tag = listdata.hashCode.toString();

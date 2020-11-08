@@ -18,7 +18,7 @@ class PopularAnimes extends StatelessWidget {
           return ListView.builder(
             scrollDirection: Axis.horizontal,
             addRepaintBoundaries: true,
-            itemCount: 10,
+            itemCount: popularController.popAnimemodel.length,
             itemBuilder: (context, index) {
               var listdata = popularController.popAnimemodel[index];
               var tag = listdata.hashCode.toString();
