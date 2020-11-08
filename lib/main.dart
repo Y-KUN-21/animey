@@ -1,7 +1,4 @@
-import 'package:anime/views/detailpage.dart';
 import 'package:anime/views/homepage.dart';
-import 'package:anime/screens/home/view_popular.dart';
-import 'package:anime/screens/home/view_recent_sub.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,8 +12,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'animay',
       theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: Colors.black,
         fontFamily: "Montserrat",
         primaryColor: Colors.red,
         accentColor: Colors.redAccent,
