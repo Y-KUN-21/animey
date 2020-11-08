@@ -1,4 +1,4 @@
-import 'package:anime/screens/detail/detailpage.dart';
+import 'package:anime/views/detailpage.dart';
 import 'package:anime/utils/constant/kSlidePageroute.dart';
 import 'package:anime/utils/constant/shadermask.dart';
 import 'package:flutter/material.dart';
