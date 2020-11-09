@@ -1,7 +1,6 @@
 import 'package:anime/controllers/detail_controller.dart';
 import 'package:anime/screens/detail/episodes.dart';
-import 'package:anime/utils/constant/kSlidePageroute.dart';
-import 'package:anime/widgets/anime_card._image.dart';
+import 'package:anime/widgets/anime_card_image.dart';
 import 'package:anime/widgets/autosizetext.dart';
 import 'package:anime/widgets/flatbutton.dart';
 import 'package:flutter/material.dart';
@@ -100,17 +99,14 @@ class DetailPage extends StatelessWidget {
                                           CustomFlatButton(
                                             text: "Watch",
                                             onPressed: () {
-                                              Navigator.push(
-                                                  context,
-                                                  SlidePageRoute(
-                                                      widget: Episodes(
-                                                    episodeNumber: controller
-                                                        .detailAnimeModel[0]
-                                                        .episodeNumber,
-                                                    episodePage: controller
-                                                        .detailAnimeModel[0]
-                                                        .episodes,
-                                                  )));
+                                              Get.to(Episodes(
+                                                episodeNumber: controller
+                                                    .detailAnimeModel[0]
+                                                    .episodeNumber,
+                                                episodePage: controller
+                                                    .detailAnimeModel[0]
+                                                    .episodes,
+                                              ));
                                             },
                                           ),
                                           SizedBox(width: 10),

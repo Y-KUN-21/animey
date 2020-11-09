@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:anime/screens/detail/player.dart';
-import 'package:anime/utils/constant/kSlidePageroute.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -77,12 +77,9 @@ class _EpisodesState extends State<Episodes> {
                           });
                           getVideo(widget.episodePage[index])
                               .then((String value) {
-                            Navigator.push(
-                                context,
-                                SlidePageRoute(
-                                    widget: Player(
-                                  episodeLink: value,
-                                )));
+                            Get.to(Player(
+                              episodeLink: value,
+                            ));
                           });
                         },
                         child: Container(
@@ -147,3 +144,5 @@ class _EpisodesState extends State<Episodes> {
     super.dispose();
   }
 }
+
+class SlidePageRoute {}

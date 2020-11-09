@@ -1,4 +1,4 @@
-import 'package:anime/widgets/anime_card._image.dart';
+import 'package:anime/widgets/anime_card_image.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 

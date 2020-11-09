@@ -1,6 +1,5 @@
 import 'package:anime/controllers/recent_controller.dart';
 import 'package:anime/views/detailpage.dart';
-import 'package:anime/utils/constant/kSlidePageroute.dart';
 import 'package:anime/widgets/listview_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,15 +28,12 @@ class RecentAnimes extends StatelessWidget {
                 tag: tag,
                 title: listdata.name,
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      SlidePageRoute(
-                          widget: DetailPage(
-                        title: listdata.name,
-                        cover: listdata.cover,
-                        link: listdata.url.toString(),
-                        tag: tag,
-                      )));
+                  Get.to(DetailPage(
+                    title: listdata.name,
+                    cover: listdata.cover,
+                    link: listdata.url.toString(),
+                    tag: tag,
+                  ));
                 },
               );
             },

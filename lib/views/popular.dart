@@ -1,6 +1,6 @@
 import 'package:anime/controllers/popular_controller.dart';
 import 'package:anime/views/detailpage.dart';
-import 'package:anime/utils/constant/kSlidePageroute.dart';
+import 'package:anime/widgets/kSlidePageroute.dart';
 import 'package:anime/widgets/listview_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

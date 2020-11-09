@@ -11,11 +11,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'animay',
+      themeMode: ThemeMode.dark,
       theme: ThemeData(
-        fontFamily: "Montserrat",
-        primaryColor: Colors.red,
-        accentColor: Colors.redAccent,
-      ),
+          fontFamily: "Montserrat",
+          primaryColor: Colors.red,
+          accentColor: Colors.redAccent,
+          backgroundColor: Colors.black,
+          primarySwatch: Colors.red,
+          brightness: Brightness.dark),
       debugShowCheckedModeBanner: false,
       home: Homepage(),
       defaultTransition: Transition.native,

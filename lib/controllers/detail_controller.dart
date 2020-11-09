@@ -46,7 +46,6 @@ class DetailController extends GetxController {
         _databaseHelper.imageUrl: cover,
         _databaseHelper.url: url
       };
-      print(url.hashCode.toString());
       await _databaseHelper.insertWatching(row);
       Get.snackbar("Added", listdata.name,
           icon: Padding(

@@ -1,7 +1,7 @@
 import 'package:anime/views/detailpage.dart';
-import 'package:anime/utils/constant/kSlidePageroute.dart';
-import 'package:anime/utils/constant/shadermask.dart';
+import 'package:anime/widgets/show_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ViewAllPopular extends StatefulWidget {
   final List popularList;
@@ -55,15 +55,12 @@ class _ViewAllPopularState extends State<ViewAllPopular> {
                           title: listdata[index].name,
                           imagePath: listdata[index].cover,
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                SlidePageRoute(
-                                    widget: DetailPage(
-                                  title: listdata[index].name,
-                                  cover: listdata[index].cover,
-                                  link: listdata[index].url,
-                                  tag: listdata[index].name.hashCode.toString(),
-                                )));
+                            Get.to(DetailPage(
+                              title: listdata[index].name,
+                              cover: listdata[index].cover,
+                              link: listdata[index].url,
+                              tag: listdata[index].name.hashCode.toString(),
+                            ));
                           },
                         ),
                       ),

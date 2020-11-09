@@ -1,0 +1,10 @@
+
+build/
+
+lib/controllers/episodes_controller.dart
+
+lib/controllers/watching_controller.dart
+
+lib/model/episodeanimemodel.dart
+
+lib/views/watching.dart

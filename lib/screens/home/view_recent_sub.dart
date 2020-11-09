@@ -1,6 +1,6 @@
 import 'package:anime/views/detailpage.dart';
-import 'package:anime/utils/constant/kSlidePageroute.dart';
-import 'package:anime/utils/constant/shadermask.dart';
+import 'package:anime/widgets/kSlidePageroute.dart';
+import 'package:anime/widgets/show_image.dart';
 import 'package:flutter/material.dart';
 
 class ViewAllRecentSub extends StatefulWidget {

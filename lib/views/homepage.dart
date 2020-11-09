@@ -3,9 +3,10 @@ import 'package:anime/screens/home/view_popular.dart';
 import 'package:anime/views/popular.dart';
 import 'package:anime/views/recent_sub.dart';
 import 'package:anime/views/search_anime.dart';
-import 'package:anime/utils/constant/kSlidePageroute.dart';
-import 'package:anime/utils/constant/ktextStyle.dart';
+import 'package:anime/views/watching.dart';
 import 'package:anime/widgets/autosizetext.dart';
+import 'package:anime/widgets/kSlidePageroute.dart';
+import 'package:anime/widgets/ktextStyle.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: CustomAutoSizeText(
           text: "animey".toUpperCase(),
@@ -56,6 +58,7 @@ class Homepage extends StatelessWidget {
             onPressed: () {},
           ),
           RecentAnimes(),
+          WatchingAnimes(),
         ]),
       ),
     );
