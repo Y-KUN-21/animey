@@ -1,6 +1,9 @@
 import 'package:anime/Database/DatabaseHelper.dart';
 import 'package:anime/model/detailanimemodel.dart';
 import 'package:anime/res/anime_api_request.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -45,9 +48,28 @@ class DetailController extends GetxController {
       };
       print(url.hashCode.toString());
       await _databaseHelper.insertWatching(row);
-      Get.snackbar("Added", listdata.name);
+      Get.snackbar("Added", listdata.name,
+          icon: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Icon(
+              Icons.thumb_up_alt_outlined,
+              size: 30,
+            ),
+          ),
+          dismissDirection: SnackDismissDirection.HORIZONTAL,
+          duration: Duration(seconds: 2));
     } on DatabaseException {
-      Get.snackbar("Already Added", listdata.name);
+      Get.snackbar("Already Added", listdata.name,
+          dismissDirection: SnackDismissDirection.HORIZONTAL,
+          snackPosition: SnackPosition.BOTTOM,
+          icon: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Icon(
+              EvaIcons.alertCircle,
+              size: 30,
+            ),
+          ),
+          duration: Duration(seconds: 2));
       print(url.hashCode.toString());
     }
   }
