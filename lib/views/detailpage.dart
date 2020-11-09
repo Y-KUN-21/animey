@@ -1,11 +1,9 @@
 import 'package:anime/controllers/detail_controller.dart';
 import 'package:anime/screens/detail/episodes.dart';
-import 'package:anime/utils/constant/circularbtn.dart';
 import 'package:anime/utils/constant/kSlidePageroute.dart';
+import 'package:anime/widgets/anime_card._image.dart';
 import 'package:anime/widgets/autosizetext.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:anime/widgets/flatbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,33 +19,25 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconTheme.of(context),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
-                child: Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? Colors.black12
-                            : Colors.grey[900],
-                        borderRadius: BorderRadius.circular(10)),
-                    height: MediaQuery.of(context).orientation ==
-                            Orientation.portrait
-                        ? screenSize.height / 1.350
-                        : screenSize.width / 1.6,
-                    width: MediaQuery.of(context).orientation ==
-                            Orientation.portrait
-                        ? double.infinity
-                        : screenSize.width / 1,
+        backgroundColor: Colors.black,
+        body: SingleChildScrollView(
+          child: Center(
+            child: Stack(
+              alignment: Alignment.topLeft,
+              textDirection: TextDirection.ltr,
+              children: [
+                Container(
+                  height: screenSize.height / 1.5,
+                  width: screenSize.width,
+                  child: AnimeCardImage(
+                    imageUrl: cover,
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20))),
+                ),
+                Container(
                     child: link == null
                         ? Center(
                             child: CircularProgressIndicator(),
@@ -56,115 +46,93 @@ class DetailPage extends StatelessWidget {
                             init: DetailController(link),
                             builder: (controller) {
                               if (controller.isLoading.value)
-                                return Center(
-                                    child: CircularProgressIndicator());
+                                return Container(
+                                    margin: EdgeInsets.only(top: 680),
+                                    child: Center(
+                                        child: CircularProgressIndicator()));
                               else
-                                print(controller.detailAnimeModel[0].name);
-                              return Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
+                                return Container(
+                                  margin: EdgeInsets.only(
+                                      top: screenSize.height / 1.55,
+                                      left: 20,
+                                      right: 20),
                                   child: Column(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                      .orientation ==
-                                                  Orientation.portrait
-                                              ? screenSize.height / 6
-                                              : screenSize.height / 2),
                                       CustomAutoSizeText(
                                         text: controller
                                                 .detailAnimeModel[0].name ??
                                             "unknown",
                                         maxLines: 2,
                                         fontSize: 30,
-                                        color: Theme.of(context).accentColor,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.w900,
                                       ),
+                                      SizedBox(height: 10),
+                                      CustomAutoSizeText(
+                                        text: controller
+                                                .detailAnimeModel[0].tags
+                                                .toString() ??
+                                            "No tags",
+                                        maxLines: 2,
+                                        fontSize: 15,
+                                        textAlign: TextAlign.left,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.grey,
+                                      ),
+                                      SizedBox(height: 10),
                                       CustomAutoSizeText(
                                         text: controller.detailAnimeModel[0]
                                                 .description ??
                                             "No description",
                                         maxLines: 6,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w900,
+                                        fontSize: 25,
+                                        textAlign: TextAlign.left,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white,
                                       ),
-                                      Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              KCircularBtn(
-                                                  icon: Icon(EvaIcons
-                                                      .playCircleOutline),
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        SlidePageRoute(
-                                                            widget: Episodes(
-                                                          episodeNumber: controller
-                                                              .detailAnimeModel[
-                                                                  0]
-                                                              .episodeNumber,
-                                                          episodePage: controller
-                                                              .detailAnimeModel[
-                                                                  0]
-                                                              .episodes,
-                                                        )));
-                                                  }),
-                                              SizedBox(width: 20),
-                                              KCircularBtn(
-                                                icon:
-                                                    Icon(EvaIcons.plusOutline),
-                                                onPressed: () {
-                                                  controller.insertWatching(
-                                                    controller
-                                                        .detailAnimeModel[0],
-                                                    link,
-                                                    cover,
-                                                  );
-                                                },
-                                              )
-                                            ],
-                                          ))
+                                      SizedBox(height: 10),
+                                      Row(
+                                        children: [
+                                          CustomFlatButton(
+                                            text: "Watch",
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  SlidePageRoute(
+                                                      widget: Episodes(
+                                                    episodeNumber: controller
+                                                        .detailAnimeModel[0]
+                                                        .episodeNumber,
+                                                    episodePage: controller
+                                                        .detailAnimeModel[0]
+                                                        .episodes,
+                                                  )));
+                                            },
+                                          ),
+                                          SizedBox(width: 10),
+                                          CustomFlatButton(
+                                              text: "Add",
+                                              onPressed: () {
+                                                controller.insertWatching(
+                                                  controller
+                                                      .detailAnimeModel[0],
+                                                  link,
+                                                  cover,
+                                                );
+                                              }),
+                                        ],
+                                      ),
                                     ],
                                   ),
-                                ),
-                              );
+                                );
                             })),
-              ),
-              Container(
-                color: Colors.transparent,
-                child: Hero(
-                  transitionOnUserGestures: true,
-                  tag: cover,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: CachedNetworkImage(
-                      placeholder: (context, url) =>
-                          Center(child: CircularProgressIndicator()),
-                      imageUrl: cover,
-                      fadeInCurve: Curves.bounceIn,
-                      fit: BoxFit.fill,
-                      height: MediaQuery.of(context).orientation ==
-                              Orientation.landscape
-                          ? screenSize.height / 1.3
-                          : screenSize.height / 2.7,
-                      width: MediaQuery.of(context).orientation ==
-                              Orientation.landscape
-                          ? screenSize.width / 3.2
-                          : screenSize.width / 2,
-                    ),
-                  ),
-                ),
-              )
-            ],
+              ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

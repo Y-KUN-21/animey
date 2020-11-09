@@ -39,17 +39,6 @@ class Homepage extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        leading: IconButton(
-            icon: Icon(
-              EvaIcons.colorPaletteOutline,
-              size: 27,
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white
-                  : Colors.grey[700],
-            ),
-            onPressed: () {
-              changingTheme();
-            }),
       ),
       body: SingleChildScrollView(
         child: Column(children: [
@@ -77,6 +66,9 @@ void changingTheme() {
   if (Get.isDarkMode) {
     Get.changeTheme(ThemeData.light());
   } else {
-    Get.changeTheme(ThemeData.dark());
+    Get.changeTheme(ThemeData(
+        accentColor: Colors.redAccent,
+        primaryColor: Colors.red,
+        brightness: Brightness.dark));
   }
 }

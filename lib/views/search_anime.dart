@@ -1,7 +1,7 @@
 import 'package:anime/controllers/searched_controller.dart';
 import 'package:anime/views/detailpage.dart';
 import 'package:anime/utils/constant/kSlidePageroute.dart';
-import 'package:anime/utils/constant/klistviewDb.dart';
+import 'package:anime/widgets/search_listview.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -76,7 +76,7 @@ class _SearchAnimeState extends State<SearchAnime> {
             itemCount: searchController.searchAnimeModel.length,
             itemBuilder: (ctx, int index) {
               var listdata = searchController.searchAnimeModel[index];
-              return KlistViewVertical(
+              return SearchListView(
                 name: listdata.name,
                 year: listdata.year,
                 season: listdata.season,
