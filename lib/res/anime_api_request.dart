@@ -1,10 +1,8 @@
-import 'package:anime/model/anime_detail_model.dart';
 import 'package:anime/model/detailanimemodel.dart';
+import 'package:anime/model/episodeanimemodel.dart';
 import 'package:anime/model/popanimemodel.dart';
 import 'package:anime/model/recentanimemodel.dart';
 import 'package:anime/model/searchanimemodel.dart';
-import 'package:anime/model/searched_anime_model.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
@@ -23,37 +21,8 @@ class AnimeApiRequest {
   static var getRecent = "$mainurl/recent";
   static var getDetail = "$mainurl/detail?anime=";
   static var getSearched = "$mainurl/search?anime=";
+  static var getVideos = "$mainurl/video?episode=";
   var client = http.Client();
-
-  Future<List<AnimeDetailModel>> getAnimeDetail(String anime) async {
-    dio.interceptors.add(_dioCacheManager.interceptor);
-
-    Response response =
-        await dio.get(getDetail + "$anime", options: _cacheOptions);
-    final List rawData = jsonDecode(jsonEncode(response.data).toString());
-    if (response.statusCode != 200) {
-      print("error");
-    }
-    if (response.statusCode == 200) {
-      List<AnimeDetailModel> animeDetailModel =
-          rawData.map((f) => AnimeDetailModel.fromJson(f)).toList();
-      return animeDetailModel;
-    }
-    return null;
-  }
-
-  Future<List<SearchedAnimeModel>> getSearchedAnime(String search) async {
-    dio.interceptors.add(_dioCacheManager.interceptor);
-    Response response =
-        await dio.get(getSearched + "$search", options: _cacheOptions);
-    final List rawData = jsonDecode(jsonEncode(response.data).toString());
-    if (response.statusCode != 200) {
-      print("error");
-    }
-    List<SearchedAnimeModel> searchedAnimeModel =
-        rawData.map((f) => SearchedAnimeModel.fromJson(f)).toList();
-    return searchedAnimeModel;
-  }
 
   static Future<List<PopAnimeModel>> getPopAnime() async {
     dio.interceptors.add(_dioCacheManager.interceptor);
@@ -97,6 +66,20 @@ class AnimeApiRequest {
       final String rawData = jsonEncode(response.data).toString();
       final detailAnimeModel = detailAnimeModelFromJson(rawData);
       return detailAnimeModel;
+    }
+    return null;
+  }
+
+  static Future<List<EpisodeAnimeModel>> getVideo(String url) async {
+    dio.interceptors.add(_dioCacheManager.interceptor);
+    Response response =
+        await dio.get(getVideos + "$url", options: _cacheOptions);
+
+    if (response.statusCode == 200) {
+      final String rawData = jsonEncode(response.data).toString();
+      print(rawData);
+      final episdoeAnimeModel = episodeAnimeModelFromJson(rawData);
+      return episdoeAnimeModel;
     }
     return null;
   }
