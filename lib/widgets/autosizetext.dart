@@ -9,6 +9,7 @@ class CustomAutoSizeText extends StatelessWidget {
   final double fontSize;
   final Color color;
   final TextAlign textAlign;
+  final double letterSpacing;
 
   const CustomAutoSizeText(
       {Key key,
@@ -18,7 +19,8 @@ class CustomAutoSizeText extends StatelessWidget {
       this.maxLines,
       this.fontSize,
       this.color,
-      this.textAlign})
+      this.textAlign,
+      this.letterSpacing})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class CustomAutoSizeText extends StatelessWidget {
       textAlign: textAlign ?? TextAlign.center,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
+        letterSpacing: letterSpacing ?? 0,
         fontFamily: fontfamily ?? "Montserrat",
         color: color == null
             ? Theme.of(context).brightness == Brightness.dark

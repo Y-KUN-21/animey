@@ -31,7 +31,7 @@ class RecentAnimes extends StatelessWidget {
                   Get.to(DetailPage(
                     title: listdata.name,
                     cover: listdata.cover,
-                    link: listdata.url.toString(),
+                    link: listdata.url.toString() ?? null,
                     tag: tag,
                   ));
                 },

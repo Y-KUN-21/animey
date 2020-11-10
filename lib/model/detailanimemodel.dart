@@ -15,47 +15,31 @@ class DetailAnimeModel {
   DetailAnimeModel({
     this.name,
     this.description,
-    this.studio,
     this.tags,
-    this.year,
-    this.season,
-    this.status,
     this.episodeNumber,
-    this.episodes,
+    this.episodeUrLs,
   });
 
   String name;
   String description;
-  String studio;
   String tags;
-  String year;
-  String season;
-  String status;
   List<String> episodeNumber;
-  List<String> episodes;
+  List<String> episodeUrLs;
 
   factory DetailAnimeModel.fromJson(Map<String, dynamic> json) =>
       DetailAnimeModel(
         name: json["name"],
         description: json["description"],
-        studio: json["studio"],
         tags: json["tags"],
-        year: json["year"],
-        season: json["Season"],
-        status: json["Status"],
         episodeNumber: List<String>.from(json["episodeNumber"].map((x) => x)),
-        episodes: List<String>.from(json["episodes"].map((x) => x)),
+        episodeUrLs: List<String>.from(json["episodeURLs"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "description": description,
-        "studio": studio,
         "tags": tags,
-        "year": year,
-        "Season": season,
-        "Status": status,
         "episodeNumber": List<dynamic>.from(episodeNumber.map((x) => x)),
-        "episodes": List<dynamic>.from(episodes.map((x) => x)),
+        "episodeURLs": List<dynamic>.from(episodeUrLs.map((x) => x)),
       };
 }

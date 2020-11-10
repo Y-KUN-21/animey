@@ -3,7 +3,6 @@ import 'package:anime/screens/home/view_popular.dart';
 import 'package:anime/views/popular.dart';
 import 'package:anime/views/recent_sub.dart';
 import 'package:anime/views/search_anime.dart';
-import 'package:anime/views/watching.dart';
 import 'package:anime/widgets/autosizetext.dart';
 import 'package:anime/widgets/kSlidePageroute.dart';
 import 'package:anime/widgets/ktextStyle.dart';
@@ -58,7 +57,6 @@ class Homepage extends StatelessWidget {
             onPressed: () {},
           ),
           RecentAnimes(),
-          WatchingAnimes(),
         ]),
       ),
     );

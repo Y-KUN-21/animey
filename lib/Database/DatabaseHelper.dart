@@ -49,7 +49,7 @@ class DatabaseHelper {
     return await db.insert(_tableWatching, row);
   }
 
-  Future<List<Map<String, dynamic>>> queryAllWatching() async {
+  Future<List<dynamic>> queryAllWatching() async {
     Database db = await instance.db;
     var result = await db.query(_tableWatching);
     return result.toList();

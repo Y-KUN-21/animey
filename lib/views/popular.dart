@@ -13,15 +13,21 @@ class PopularAnimes extends StatelessWidget {
       height: 300,
       child: Obx(() {
         if (popularController.isLoading.value)
-          return Center(child: CircularProgressIndicator());
+          return Center(child: LinearProgressIndicator());
         else
           return ListView.builder(
             scrollDirection: Axis.horizontal,
             addRepaintBoundaries: true,
-            itemCount: popularController.popAnimemodel.length,
+            itemCount: popularController.popAnimemodel.length + 1,
             itemBuilder: (context, index) {
               var listdata = popularController.popAnimemodel[index];
               var tag = listdata.hashCode.toString();
+              if (index == popularController.popAnimemodel.length) {
+                return Container(
+                  width: 300,
+                  color: Colors.red,
+                );
+              }
               return KlistViewHorizontal(
                 thumbnail: listdata.cover == null
                     ? CircularProgressIndicator()
