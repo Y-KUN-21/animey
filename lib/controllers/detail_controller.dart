@@ -69,7 +69,6 @@ class DetailController extends GetxController {
             ),
           ),
           duration: Duration(seconds: 2));
-      print(url.hashCode.toString());
     }
   }
 }

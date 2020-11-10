@@ -12,7 +12,7 @@ class RecentAnimes extends StatelessWidget {
       height: 300,
       child: Obx(() {
         if (recentController.isLoading.value)
-          return Center(child: CircularProgressIndicator());
+          return Center(child: LinearProgressIndicator());
         else
           return ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -31,7 +31,7 @@ class RecentAnimes extends StatelessWidget {
                   Get.to(DetailPage(
                     title: listdata.name,
                     cover: listdata.cover,
-                    link: listdata.url.toString() ?? null,
+                    link: listdata.url.toString(),
                     tag: tag,
                   ));
                 },

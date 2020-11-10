@@ -1,148 +1,83 @@
-import 'dart:convert';
+import 'package:anime/controllers/episodes_controller.dart';
 import 'package:anime/screens/detail/player.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:get/get.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 
-class Episodes extends StatefulWidget {
-  final List episodeNumber, episodePage;
-  Episodes({this.episodeNumber, this.episodePage});
+class EpisodeList extends StatefulWidget {
+  final List episodeNumber, episodeURLs;
+  const EpisodeList({Key key, this.episodeNumber, this.episodeURLs})
+      : super(key: key);
+
   @override
-  _EpisodesState createState() => _EpisodesState();
+  _EpisodeListState createState() => _EpisodeListState();
 }
 
-String url;
-bool isLoading = false;
-String status = "Fetching link.";
-
-class _EpisodesState extends State<Episodes> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class _EpisodeListState extends State<EpisodeList> {
+  EpisodeController episodeController = Get.put(EpisodeController());
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    var orientation = MediaQuery.of(context).orientation;
     return Scaffold(
-        appBar: AppBar(
-          iconTheme: IconTheme.of(context),
-          title: Text(
-            "episodes",
-            style: TextStyle(color: Colors.white),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        iconTheme: IconTheme.of(context),
+        title: Text(
+          "Episodes",
+          style: TextStyle(color: Colors.white),
         ),
-        body: ModalProgressHUD(
-          inAsyncCall: isLoading,
-          progressIndicator: Container(
-            color: Colors.transparent,
-            height: 150,
-            width: 150,
-            child: Center(
-                child: Column(children: [
-              CircularProgressIndicator(),
-              AutoSizeText(
-                "\nFetching link",
-                style: TextStyle(color: Colors.white, fontSize: 15),
-              )
-            ])),
-          ),
-          child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 5.0, vertical: 15),
-              child: GridView.builder(
-                  itemCount: widget.episodeNumber.length,
-                  gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: MediaQuery.of(context).orientation ==
-                            Orientation.landscape
-                        ? 8
-                        : 5,
-                    childAspectRatio: MediaQuery.of(context).orientation ==
-                            Orientation.landscape
-                        ? 6 / 4
-                        : screenSize.width / (screenSize.height / 2.8),
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isLoading = true;
-                          });
-                          getVideo(widget.episodePage[index])
-                              .then((String value) {
-                            Get.to(Player(
-                              episodeLink: value,
-                            ));
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: Colors.grey[800]), // button color
-                          child: SizedBox(
-                              child: Center(
-                                  child: AutoSizeText(
-                            "EP " + widget.episodeNumber[index].toString(),
-                            minFontSize: 10,
-                            maxFontSize: 20,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          ))),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 15),
+        child: GridView.builder(
+            itemCount: widget.episodeNumber.length,
+            gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: orientation == Orientation.landscape ? 8 : 5,
+              childAspectRatio: orientation == Orientation.landscape
+                  ? 6 / 4
+                  : width / (height / 2.8),
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              var episodenum = widget.episodeNumber[index];
+              var episodeurl = widget.episodeURLs[index];
+              return Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: OutlineButton(
+                    textColor: Colors.red,
+                    color: Colors.white,
+                    splashColor: Colors.white,
+                    padding: EdgeInsets.all(10),
+                    borderSide: BorderSide(color: Colors.red),
+                    highlightedBorderColor: Colors.red,
+                    highlightElevation: 4.0,
+                    child: Center(
+                      child: Text(
+                        "EP " + episodenum.toString(),
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
                         ),
                       ),
-                    );
-                  })),
-        ));
-  }
-
-  Future<String> getVideo(String episodePage) async {
-    String url = "link-to-api -_-/parameter=$episodePage";
-    Response response = await Dio().get(url);
-    if (response.statusCode != 200) {
-      setState(() {
-        status = "something went wrong _getVideo\n ${response.statusMessage}";
-      });
-    }
-    final List rawData = await jsonDecode(jsonEncode(response.data).toString());
-    var urls = await rawData[0];
-    print(urls);
-    print(urls['url0']);
-    var result;
-    if (urls['url0'] != null) {
-      setState(() {
-        isLoading = false;
-        result = urls["url0"];
-      });
-
-      return result;
-    } else if (urls["url1"] != null) {
-      setState(() {
-        isLoading = false;
-        result = urls["url"][1];
-      });
-      return result;
-    } else {
-      setState(() {
-        isLoading = false;
-      });
-    }
-    return null;
-  }
-
-  @override
-  void dispose() {
-    isLoading = false;
-    super.dispose();
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(5.0)),
+                    onPressed: () {
+                      episodeController
+                          .fetchEpUrls(episodeurl)
+                          .then((String videourl) {
+                        Get.to(Player(
+                          episodeLink: videourl,
+                        ));
+                      });
+                    }),
+              );
+            }),
+      ),
+    );
   }
 }
-
-class SlidePageRoute {}

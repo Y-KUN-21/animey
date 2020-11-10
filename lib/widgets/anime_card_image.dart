@@ -20,8 +20,8 @@ class AnimeCardImage extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: CachedNetworkImage(
-            errorWidget: (context, url, error) => Image.network(
-                "https://icon-library.com/images/saitama-icon/saitama-icon-16.jpg"),
+            errorWidget: (context, url, error) =>
+                Image.asset("assets/error.png"),
             placeholder: (context, url) =>
                 Center(child: CircularProgressIndicator()),
             imageUrl: imageUrl,
