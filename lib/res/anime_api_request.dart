@@ -1,5 +1,4 @@
 import 'package:anime/model/detailanimemodel.dart';
-import 'package:anime/model/episodeanimemodel.dart';
 import 'package:anime/model/popanimemodel.dart';
 import 'package:anime/model/recentanimemodel.dart';
 import 'package:anime/model/searchanimemodel.dart';
@@ -66,20 +65,6 @@ class AnimeApiRequest {
       final String rawData = jsonEncode(response.data).toString();
       final detailAnimeModel = detailAnimeModelFromJson(rawData);
       return detailAnimeModel;
-    }
-    return null;
-  }
-
-  static Future<List<EpisodeAnimeModel>> getVideo(String url) async {
-    dio.interceptors.add(_dioCacheManager.interceptor);
-    Response response =
-        await dio.get(getVideos + "$url", options: _cacheOptions);
-
-    if (response.statusCode == 200) {
-      final String rawData = jsonEncode(response.data).toString();
-      print(rawData);
-      final episdoeAnimeModel = episodeAnimeModelFromJson(rawData);
-      return episdoeAnimeModel;
     }
     return null;
   }

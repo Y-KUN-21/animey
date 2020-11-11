@@ -1,8 +1,2 @@
 
 build/
-
-lib/controllers/watching_controller.dart
-
-lib/model/episodeanimemodel.dart
-
-lib/views/watching.dart

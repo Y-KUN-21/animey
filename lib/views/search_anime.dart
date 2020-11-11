@@ -26,7 +26,7 @@ class _SearchAnimeState extends State<SearchAnime> {
       appBar: AppBar(
         title: _searchBar(),
         iconTheme: IconTheme.of(context),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black,
         elevation: 0.0,
       ),
       body: SafeArea(
@@ -64,36 +64,40 @@ class _SearchAnimeState extends State<SearchAnime> {
   }
 
   Widget _searchFuture() {
-    return Container(child: Obx(() {
-      if (searchController.isLoading.value)
-        return Center(
-            child: Center(
-          child: CircularProgressIndicator(),
-        ));
-      else {
-        return ListView.builder(
-            itemCount: searchController.searchAnimeModel.length,
-            itemBuilder: (ctx, int index) {
-              var listdata = searchController.searchAnimeModel[index];
-              return SearchListView(
-                name: listdata.name,
-                year: listdata.year,
-                season: listdata.season,
-                status: listdata.status,
-                imageUrl: listdata.cover,
-                tag: listdata.name.hashCode,
-                onTap: () {
-                  Get.to(DetailPage(
-                    title: listdata.name,
-                    cover: listdata.cover,
-                    link: listdata.url,
-                    tag: listdata.name.hashCode.toString(),
-                  ));
-                },
-              );
-            });
-      }
-    }));
+    return Container(
+        color: Colors.black,
+        child: Obx(() {
+          if (searchController.isLoading.value)
+            return Center(
+                child: Center(
+              child: CircularProgressIndicator(),
+            ));
+          else {
+            return ListView.builder(
+                itemCount: searchController.searchAnimeModel.length,
+                itemBuilder: (ctx, int index) {
+                  var listdata = searchController.searchAnimeModel[index];
+                  return SearchListView(
+                    name: listdata.name,
+                    year: listdata.year,
+                    season: listdata.season,
+                    status: listdata.status,
+                    imageUrl: listdata.cover,
+                    tag: listdata.name.hashCode,
+                    onTap: () {
+                      Get.to(
+                          DetailPage(
+                            title: listdata.name,
+                            cover: listdata.cover,
+                            link: listdata.url,
+                            tag: listdata.name.hashCode.toString(),
+                          ),
+                          transition: Transition.rightToLeft);
+                    },
+                  );
+                });
+          }
+        }));
   }
 
   @override
