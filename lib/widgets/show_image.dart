@@ -26,7 +26,7 @@ class ShowImage extends StatelessWidget {
                 blendMode: BlendMode.dstOut,
               ),
               width: 200,
-              height: 290,
+              height: 350,
             ),
           ),
         ),

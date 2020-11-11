@@ -2,13 +2,11 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DatabaseHelper {
-  String _tableWatching = "watching";
+  String tableWatching = "watching";
   String name = "name";
   String url = "url";
   String pkey = "pkey";
   String imageUrl = "imageUrl";
-  String status = "categories";
-  String season = "season";
   static final id = 'id';
   String _tablePlanning = "planning";
 
@@ -34,24 +32,23 @@ class DatabaseHelper {
 
   void _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE IF NOT EXISTS $_tableWatching(
+      CREATE TABLE IF NOT EXISTS $tableWatching(
       $pkey INTEGER UNIQUE,
       $name TEXT,
       $url TEXT UNIQUE,
       $imageUrl TEXT,
-      $season TEXT,
-      $status TEXT)
+      )
     ''');
   }
 
   Future<int> insertWatching(Map<String, dynamic> row) async {
     Database db = await instance.db;
-    return await db.insert(_tableWatching, row);
+    return await db.insert(tableWatching, row);
   }
 
   Future<List<dynamic>> queryAllWatching() async {
     Database db = await instance.db;
-    var result = await db.query(_tableWatching);
+    var result = await db.query(tableWatching);
     return result.toList();
   }
 
@@ -59,7 +56,7 @@ class DatabaseHelper {
     Database db = await instance.db;
     try {
       return await db
-          .rawDelete("DELETE FROM $_tableWatching WHERE $pkey = $pkey");
+          .rawDelete("DELETE FROM $tableWatching WHERE $pkey = $pkey");
     } on Exception {
       return null;
     }

@@ -23,8 +23,8 @@ class DetailController extends GetxController {
 
   void fetchDetail(anime) async {
     try {
+      isLoading(true);
       if (anime != null) {
-        isLoading(true);
         var detailAnime = await AnimeApiRequest.getDetailAnime(anime);
         if (detailAnime != null) {
           detailAnimeModel.value = detailAnime;
@@ -41,8 +41,6 @@ class DetailController extends GetxController {
       Map<String, dynamic> row = {
         _databaseHelper.pkey: url.hashCode,
         _databaseHelper.name: listdata.name,
-        _databaseHelper.status: listdata.status,
-        _databaseHelper.season: listdata.season,
         _databaseHelper.imageUrl: cover,
         _databaseHelper.url: url
       };
@@ -55,6 +53,7 @@ class DetailController extends GetxController {
               size: 30,
             ),
           ),
+          snackPosition: SnackPosition.BOTTOM,
           dismissDirection: SnackDismissDirection.HORIZONTAL,
           duration: Duration(seconds: 2));
     } on DatabaseException {

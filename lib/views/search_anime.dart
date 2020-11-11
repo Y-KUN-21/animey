@@ -1,6 +1,5 @@
 import 'package:anime/controllers/searched_controller.dart';
 import 'package:anime/views/detailpage.dart';
-import 'package:anime/widgets/kSlidePageroute.dart';
 import 'package:anime/widgets/search_listview.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -84,15 +83,12 @@ class _SearchAnimeState extends State<SearchAnime> {
                 imageUrl: listdata.cover,
                 tag: listdata.name.hashCode,
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      SlidePageRoute(
-                          widget: DetailPage(
-                        title: listdata.name,
-                        cover: listdata.cover,
-                        link: listdata.url,
-                        tag: listdata.name.hashCode.toString(),
-                      )));
+                  Get.to(DetailPage(
+                    title: listdata.name,
+                    cover: listdata.cover,
+                    link: listdata.url,
+                    tag: listdata.name.hashCode.toString(),
+                  ));
                 },
               );
             });

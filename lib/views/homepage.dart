@@ -2,8 +2,8 @@ import 'package:anime/controllers/popular_controller.dart';
 import 'package:anime/views/popular.dart';
 import 'package:anime/views/recent_sub.dart';
 import 'package:anime/views/search_anime.dart';
+import 'package:anime/views/watching.dart';
 import 'package:anime/widgets/autosizetext.dart';
-import 'package:anime/widgets/ktextStyle.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,14 +29,9 @@ class Homepage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          KtextStyle(
-            text: " Popular",
-          ),
           PopularAnimes(),
-          KtextStyle(
-            text: " Recent Animes",
-          ),
           RecentAnimes(),
+          Watching(),
         ]),
       ),
       floatingActionButton: FloatingActionButton(
