@@ -3,8 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class EpisodeController extends GetxController {
-  var isLoading = true.obs;
-
   EpisodeController();
   @override
   void onInit() {

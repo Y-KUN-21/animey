@@ -90,6 +90,9 @@ class _EpisodeListState extends State<EpisodeList> {
                         episodeController
                             .fetchEpUrls(episodeurl)
                             .then((String videourl) {
+                          setState(() {
+                            isLoading = false;
+                          });
                           Get.to(Player(
                             episodeLink: videourl,
                           ));
@@ -100,5 +103,13 @@ class _EpisodeListState extends State<EpisodeList> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    setState(() {
+      isLoading = false;
+    });
+    super.dispose();
   }
 }
