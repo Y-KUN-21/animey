@@ -104,12 +104,4 @@ class _EpisodeListState extends State<EpisodeList> {
       ),
     );
   }
-
-  @override
-  void dispose() {
-    setState(() {
-      isLoading = false;
-    });
-    super.dispose();
-  }
 }
