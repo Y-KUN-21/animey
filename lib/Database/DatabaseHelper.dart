@@ -36,8 +36,7 @@ class DatabaseHelper {
       $pkey INTEGER UNIQUE,
       $name TEXT,
       $url TEXT UNIQUE,
-      $imageUrl TEXT,
-      )
+      $imageUrl TEXT) 
     ''');
   }
 

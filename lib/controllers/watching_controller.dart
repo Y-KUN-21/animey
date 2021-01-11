@@ -12,7 +12,7 @@ class WatchingController extends GetxController {
     super.onInit();
   }
 
-  void fetchWatching() async {
+  Future fetchWatching() async {
     Database db = await _databaseHelper.db;
     var getWatching = await db.query(_databaseHelper.tableWatching);
     watching.value = getWatching;

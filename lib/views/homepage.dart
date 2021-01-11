@@ -3,7 +3,6 @@ import 'package:anime/views/popular.dart';
 import 'package:anime/views/recent_sub.dart';
 import 'package:anime/views/search_anime.dart';
 import 'package:anime/views/watching.dart';
-import 'package:anime/widgets/autosizetext.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,25 +14,36 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: CustomAutoSizeText(
-          text: "AnimeY",
-          fontSize: 35,
-          fontWeight: FontWeight.bold,
-          fontfamily: "Roboto",
-          color: Colors.red,
+      body: CustomScrollView(slivers: <Widget>[
+        SliverAppBar(
+          pinned: true,
+          backgroundColor: Colors.red,
+          floating: true,
+          flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Image.asset(
+                "assets/logo.png",
+                height: 30,
+              ),
+              background: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                ),
+              )),
+          expandedHeight: 140,
         ),
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          PopularAnimes(),
-          RecentAnimes(),
-          Watching(),
-        ]),
-      ),
+        SliverList(
+            delegate: SliverChildListDelegate([
+          SingleChildScrollView(
+              child: Column(
+            children: [
+              PopularAnimes(),
+              RecentAnimes(),
+              Watching(),
+            ],
+          ))
+        ]))
+      ]),
       floatingActionButton: FloatingActionButton(
         child: Icon(EvaIcons.search),
         onPressed: () => Get.to(SearchAnime(), transition: Transition.downToUp),
