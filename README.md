@@ -1,4 +1,4 @@
-# Animey (W.I.P)
+# Animey
 ### An anime streaming app.
 <p align=center><b>Screenshots.</b></p>
 <p align=center>
