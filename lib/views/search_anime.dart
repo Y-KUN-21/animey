@@ -36,31 +36,48 @@ class _SearchAnimeState extends State<SearchAnime> {
   }
 
   Widget _searchBar() {
-    return Container(
-      height: 45,
-      decoration: BoxDecoration(
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.white30
-              : Colors.grey[200],
-          borderRadius: BorderRadius.circular(10)),
-      child: TextField(
-          onSubmitted: (String query) {
-            setState(() {
-              anime = query;
-            });
-            searchController.fetchSearch(anime);
-          },
-          textAlign: TextAlign.left,
-          autofocus: true,
-          controller: _controller,
-          decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(10),
-              suffixIcon: Icon(EvaIcons.searchOutline),
-              isDense: true,
-              hintText: " Search",
-              fillColor: Colors.white,
-              border: InputBorder.none)),
-    );
+    return TextField(
+        onSubmitted: (String query) {
+          setState(() {
+            anime = query;
+          });
+          searchController.fetchSearch(anime);
+        },
+        style: TextStyle(color: Colors.black),
+        textAlign: TextAlign.left,
+        autofocus: true,
+        controller: _controller,
+        decoration: InputDecoration(
+          labelStyle: TextStyle(color: Colors.black),
+          hintStyle: TextStyle(color: Colors.grey[600]),
+          suffixIcon: IconButton(
+            onPressed: () => searchController.fetchSearch(anime),
+            icon: Icon(
+              EvaIcons.searchOutline,
+              color: Colors.red,
+            ),
+          ),
+          isDense: true,
+          hintText: "Search",
+          contentPadding: new EdgeInsets.all(8.0),
+          fillColor: Colors.grey[200],
+          filled: true,
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.black, width: 1.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          border: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.black, width: 1.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.black, width: 0.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderSide: BorderSide(width: 1.0, color: Colors.red)),
+        ));
   }
 
   Widget _searchFuture() {
